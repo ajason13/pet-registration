@@ -1,7 +1,6 @@
-# Basic Project
-## Basic Project Structure
+# Pet Registration
 
-*Default Structure for A Basic Project*
+*Registers a user and their number of pets into the system. Display the price of registering the pets for the number of years to the user and exit the system.*
 
 **Java 8**
 
