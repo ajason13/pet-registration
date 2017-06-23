@@ -82,19 +82,31 @@ public class AppBasics {
 	 *            Question to ask the user
 	 * @return Char response from user
 	 */
-	public static char requestChar(String question) {
+	public static char requestChar(String question, String charErrorResponse, char... possibleChars) {
 		boolean isInvalid = true;
 		String input = "";
+		boolean validChar = false;
 		while (isInvalid) {
 			System.out.print(question + " ");
 			input = scan.nextLine();
 			try {
-				if (input.length() > 1) {
+				if (input.length() != 1) {
 					throw new InvalidCharRepsonseLength();
+				}
+				for (char c : possibleChars) {
+					if (Character.toUpperCase(c) == input.toUpperCase().charAt(0)) {
+						validChar = true;
+					}
+				}
+				if (!validChar) {
+					throw new CharNotValidException();
 				}
 				isInvalid = false;
 			} catch (InvalidCharRepsonseLength e) {
 				System.out.println("You have entered too many characters [" + input + "]");
+			} catch (CharNotValidException e) {
+				System.out.println(charErrorResponse + " [" + input + "]");
+				e.printStackTrace();
 			}
 		}
 		return input.charAt(0);
@@ -153,7 +165,34 @@ public class AppBasics {
 	 *            Question to ask the user
 	 * @return Int response from user
 	 */
+	// public static int requestInt(String question) {
+	// int value = 0;
+	// boolean isInvalid = true;
+	// while (isInvalid) {
+	// System.out.print(question + " ");
+	// String input = scan.nextLine();
+	// try {
+	// value = Integer.parseInt(input.trim());
+	// isInvalid = false;
+	// } catch (Exception e) {
+	// System.out.println("You have not entered a correct formatted number [" +
+	// input + "]");
+	// }
+	// }
+	// return value;
+	// }
 	public static int requestInt(String question) {
+		return requestIntWithinRange(question, 0, 0, "");
+	}
+
+	/**
+	 * @param string
+	 * @param i
+	 * @param j
+	 * @param string2
+	 * @return
+	 */
+	public static int requestIntWithinRange(String question, int min, int max, String rangeErrorResponse) {
 		int value = 0;
 		boolean isInvalid = true;
 		while (isInvalid) {
@@ -161,9 +200,19 @@ public class AppBasics {
 			String input = scan.nextLine();
 			try {
 				value = Integer.parseInt(input.trim());
+				if (min != 0 && max != 0) {
+					if (value < min) {
+						throw new UnderMinException();
+					}
+					if (value > max) {
+						throw new OverMaxException();
+					}
+				}
 				isInvalid = false;
-			} catch (Exception e) {
+			} catch (NumberFormatException e) {
 				System.out.println("You have not entered a correct formatted number [" + input + "]");
+			} catch (OutOfRangeException e) {
+				System.out.println(rangeErrorResponse + " [" + input + "]");
 			}
 		}
 		return value;

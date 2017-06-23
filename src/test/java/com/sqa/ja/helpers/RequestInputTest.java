@@ -43,7 +43,7 @@ public class RequestInputTest {
 	@Test
 	public void testRequestInputChar() {
 		String question = "What letter grade do you want?";
-		char response = AppBasics.requestChar(question);
+		char response = AppBasics.requestChar(question, "", 'M');
 		System.out.println("Looks like you are aiming for a(n) " + response + "+");
 	}
 
