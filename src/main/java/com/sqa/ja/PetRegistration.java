@@ -36,18 +36,6 @@ public class PetRegistration {
 	}
 
 	private static void registerPets() {
-		// int numOfPets = AppBasics.requestIntWithinRange("How many pets would
-		// you like to register?", 1, 5,
-		// "You can only register 5 pets at a time");
-		// System.out.println("You are registering " + numOfPets + "pets.");
-		// char petSex = AppBasics.requestChar("What is the sex of your pet?",
-		// "Must be acceptable gender", 'M', 'F');
-		// int numOfYears = AppBassics.requestIntWithinRacnge("How many years
-		// would you like to register your pet(s)?",
-		// 1, 10, "You can only register your pet(s) from 1 - 10 years.");
-		// double totalRegistrationCost = numOfPets * numOfYears * REG_COST;
-		// System.out.printf("It will cost a toatal of %f to register your
-		// pet(s).", totalRegistrationCost);
 		String registerQuestion = "How many pets do you want to register?";
 		String petNameQuestion = "What is pet ";
 		String yearQuestion = "How many years do you want to register ";

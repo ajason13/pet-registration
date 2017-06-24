@@ -36,20 +36,26 @@ public class AppBasics {
 	 */
 	public static boolean requestBoolean(String question) {
 		boolean isInvalid = true;
+		boolean response = false;
 		String input = "";
 		while (isInvalid) {
-			System.out.print(question + " (true/false) ");
+			System.out.print(question + " (Yes/No): ");
 			input = scan.nextLine();
 			try {
-				if (!(input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false"))) {
+				if (input.equalsIgnoreCase("yes")) {
+					isInvalid = false;
+					response = true;
+				} else if (input.equalsIgnoreCase("no")) {
+					isInvalid = false;
+					response = false;
+				} else {
 					throw new InvalidBooleanResponse();
 				}
-				isInvalid = false;
 			} catch (InvalidBooleanResponse e) {
-				System.out.println("You didn't answer true or false [" + input + "]");
+				System.out.println("You have an incorrect response (Yes/No) [" + input + "]");
 			}
 		}
-		return Boolean.parseBoolean(input.trim());
+		return response;
 	}
 
 	/**
